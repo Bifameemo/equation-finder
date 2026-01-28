@@ -3,3 +3,6 @@ func1 = lambda n: print(*map(lambda n, perm: ''.join(["1"] + [{"0": "", "1": " +
 
 # remastered - 2025* (uses eval)
 func2 = lambda m: print(''.join([(lambda s: f"{s} = {eval(s)}\n" if eval(s) == m else '')(''.join([''.join(p) for p in zip("12345678", [['', " + ", " - "][n // 3 ** (7 - i) % 3] for i in range(8)])]) + '9') for n in range(3 ** 8)]))
+
+# remastered - 2026* (uses eval)
+func3 = lambda n: print(*[(lambda m: (f"{m} = {n}\n") * (eval(m) == n))(''.join(str(i + 1) + ('', ' - ', ' + ')[x // 3 ** i % 3] for i in range(8)) + '9') for x in range(3 ** 8)], sep='')
