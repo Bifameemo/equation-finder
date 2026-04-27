@@ -6,3 +6,6 @@ func2 = lambda m: print(''.join([(lambda s: f"{s} = {eval(s)}\n" if eval(s) == m
 
 # remastered - 2026* (uses eval)
 func3 = lambda n: print(*[(lambda m: (f"{m} = {n}\n") * (eval(m) == n))(''.join(str(i + 1) + ('', ' - ', ' + ')[x // 3 ** i % 3] for i in range(8)) + '9') for x in range(3 ** 8)], sep='')
+
+# remastered - 270426* (uses eval, itertools)
+func4 = lambda n: print(*[s for p in __import__("itertools").product(('+', '-', ''), repeat=8) if eval(s := "1%s2%s3%s4%s5%s6%s7%s8%s9" % p) == n], sep='\n')
