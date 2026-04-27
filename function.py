@@ -9,3 +9,6 @@ func3 = lambda n: print(*[(lambda m: (f"{m} = {n}\n") * (eval(m) == n))(''.join(
 
 # 270426 - 164 chars (uses eval, itertools)
 func4 = lambda n: print(*[f"{s} = {n}" for p in __import__("itertools").product(('', " + ", " - "), repeat=8) if eval(s := "1%s2%s3%s4%s5%s6%s7%s8%s9" % p) == n], sep='\n')
+
+# 270426 - 175 chars (uses eval, recursion) - credit to KISHAN CHAND BHARDWAJ
+func5 = (lambda x: x(x))(lambda x: lambda n, m = '1', c = 2: (print(f"{m} = {n}") if eval(m) == n else ()) if c > 9 else any(x(x)(n, m + i + str(c), c+1) for i in ['', ' + ', ' - ']))
