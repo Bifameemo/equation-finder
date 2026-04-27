@@ -1,14 +1,17 @@
-# 2022 - 1484 chars
+# 101022 - 1484 chars
 func1 = lambda n: print(*map(lambda n, perm: ''.join(["1"] + [{"0": "", "1": " + ", "2": " - "}[perm[index]] + str(range(2, 10)[index]) for index in range(len(perm))] + [f" = {n}"]), [n] * 3 ** 8, map(lambda digit: digit.rjust(8).replace(" ", "0"), map(lambda func, n: "" if n == 0 else func(func, n // 3) + str(n % 3), [lambda func, n: "" if n == 0 else func(func, n // 3) + str(n % 3)] * 3 ** 8, filter(lambda perm: perm != None, [index if perm == n else None for index, perm in enumerate(map(sum, map(lambda func, perm: [int(perm[0])] if len(perm) == 1 else func(func, perm[:-2]) + [int({"1": "+", "2": "-"}[perm[-2]] + str(perm[-1]))], [lambda func, perm: [int(perm[0])] if len(perm) == 1 else func(func, perm[:-2]) + [int({"1": "+", "2": "-"}[perm[-2]] + str(perm[-1]))]] * 3 ** 8, map(lambda func, perm, ls = ["1"]: ls if perm == "" else func(func, perm[1:], ls[:-1] + [ls[-1] + str(range(2, 10)[8 - len(perm)])]) if perm[0] == "0" else func(func, perm[1:], ls + [perm[0]] + [str(range(2, 10)[8 - len(perm)])]), [lambda func, perm, ls = ["1"]: ls if perm == "" else func(func, perm[1:], ls[:-1] + [ls[-1] + str(range(2, 10)[8 - len(perm)])]) if perm[0] == "0" else func(func, perm[1:], ls + [perm[0]] + [str(range(2, 10)[8 - len(perm)])])] * 3 ** 8, map(lambda digit: digit.rjust(8).replace(" ", "0"), map(lambda func, n: "" if n == 0 else func(func, n // 3) + str(n % 3), [lambda func, n: "" if n == 0 else func(func, n // 3) + str(n % 3)] * 3 ** 8, range(3 ** 8)))))))])))), sep="\n")
 
-# 2025 - 224 chars (uses eval)
+# 060525 - 224 chars (uses eval)
 func2 = lambda m: print(''.join([(lambda s: f"{s} = {eval(s)}\n" if eval(s) == m else '')(''.join([''.join(p) for p in zip("12345678", [['', " + ", " - "][n // 3 ** (7 - i) % 3] for i in range(8)])]) + '9') for n in range(3 ** 8)]))
 
-# 2026 - 179 chars (uses eval)
+# 290126 - 179 chars (uses eval)
 func3 = lambda n: print(*[(lambda m: (f"{m} = {n}\n") * (eval(m) == n))(''.join(str(i + 1) + ('', ' + ', ' - ')[x // 3 ** i % 3] for i in range(8)) + '9') for x in range(3 ** 8)], sep='')
 
 # 270426 - 164 chars (uses eval, itertools)
 func4 = lambda n: print(*[f"{s} = {n}" for p in __import__("itertools").product(('', " + ", " - "), repeat=8) if eval(s := "1%s2%s3%s4%s5%s6%s7%s8%s9" % p) == n], sep='\n')
 
-# 270426 - 175 chars (uses eval, recursion) - credit to KISHAN CHAND BHARDWAJ
-func5 = (lambda x: x(x))(lambda x: lambda n, m = '1', c = 2: (print(f"{m} = {n}") if eval(m) == n else ()) if c > 9 else any(x(x)(n, m + i + str(c), c+1) for i in ['', ' + ', ' - ']))
+# 270426 - 177 chars (uses eval) - credit to KISHAN CHAND BHARDWAJ for first recursive solution
+func5 = (lambda x: x(x))(lambda x: lambda n, m = '1', c = 2: (print(f"{m} = {n}") if eval(m) == n else ()) if c > 9 else any(x(x)(n, m + i + str(c), c + 1) for i in ['', ' + ', ' - ']))
+
+# 270426 - 287 chars
+func6 = lambda n, i = 0, r = 0: [(lambda l: print(l.replace('$', ' '), '=', n) if sum(map(int, l.replace(' ', '').split('$'))) == n else 0)("1%s2%s3%s4%s5%s6%s7%s8%s9" % (i := j, tuple((r := i % 3, ('', "$+ ", "$- ")[r], i := i // 3)[1] if i else '' for _ in range(8)))[1]) for j in range(6561)]
